@@ -1,9 +1,10 @@
 # EXPERIMENT-NO--03-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resistor
+ ###  DATE: 01-03-2024
 
-# DATE :
-# NAME :
-# ROLLNUMBER :
-# DEPARTMENT
+###  NAME: KOUSALYA A
+###  ROLL NO :212222230068
+###  DEPARTMENT: ARTIFICIAL INTELLIGENCE 
+
 ## AIM: 
 To interface an FSR(force sensitive resistor) and scale the output voltage obtained to pressure applied 
  
@@ -62,6 +63,16 @@ The easiest way to measure a resistive sensor is to connect one end to power and
 
 
 ### FIGURE-03 CIRCUIT DIAGRAM
+### OFF:
+![Screenshot 2024-03-01 162045](https://github.com/saran7d/EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resist/assets/104412179/b49bb6c5-94d1-4f3b-8e5f-1eaab9c5598e)
+
+### ON:
+![Screenshot 2024-03-01 162135](https://github.com/saran7d/EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resist/assets/104412179/235edda0-52d1-4cda-b7b0-3099c295909e)
+
+
+
+### SCHEMATIC DIAGRAM
+![Screenshot 2024-03-01 162022](https://github.com/saran7d/EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resist/assets/104412179/2c074d93-039f-430d-b3ce-2e4da0fae380)
 
 
 
@@ -79,13 +90,44 @@ The easiest way to measure a resistive sensor is to connect one end to power and
 
 
 ### PROGRAM 
- *your roll no 
- * your name 
- * department and year 
+```
+int LED=7;
+int FSR;
+void setup()
+{
+  pinMode(LED,OUTPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  FSR =analogRead(A0);
+  Serial.print("RAW VALUE=");
+  Serial.println(FSR);
+  delay(500);
+  int m;
+  m=map(FSR,0,159,0,10);
+  Serial.print("mapped value=");
+  Serial.println(m);
+  if(FSR>50)
+  {
+    digitalWrite(LED,LOW);
+    delay(500);
+    digitalWrite(LED,HIGH);
+    delay(500);
+  }
+}
+```
+
+
+![Screenshot 2024-03-01 161557](https://github.com/saran7d/EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resist/assets/104412179/6f5e6cd4-a2db-4183-8b47-499264112ea5)
+
+
  
+### Figure 04 COMPARISION OF APPLIED AND MAPPED FORCES 
  
- 
- 
+ ![Screenshot 2024-03-01 185905](https://github.com/saran7d/EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resist/assets/104412179/ca4fc764-d670-4856-87a4-0da08b345eb6)
+
+
  
  
  
@@ -98,10 +140,8 @@ The easiest way to measure a resistive sensor is to connect one end to power and
  
  
 
-![image](https://user-images.githubusercontent.com/36288975/188804653-a3154e8e-2655-46f2-9dcd-f425dd1ba109.png)
 
 
-### TABLE -02 standard deviation table 
 ### Population Standard Deviation
 The population standard deviation, the standard definition of σ, is used when an entire population can be measured, and is the square root of the variance of a given data set. In cases where every member of a population can be sampled, the following equation can be used to find the standard deviation of the entire population:
 
@@ -113,15 +153,13 @@ xi is an individual value
 N is the total number of values
 
 For those unfamiliar with summation notation, the equation above may seem daunting, but when addressed through its individual components, this summation is not particularly complicated. The i=1 in the summation indicates the starting index, i.e. for the data set 1, 3, 4, 7, 8, i=1 would be 1, i=2 would be 3, and so on. Hence the summation notation simply means to perform the operation of (xi - μ)2 on each value through N, which in this case is 5 since there are 5 values in this data set.
+### CALCULATION
+```
+μ = (0.9+2.02+2.99+4.03+4.95+5.97+6.92+7.94+9.03+10) / 10 = 5.484        
+σ = √[(0.99- 5.484)^2 + (3 - 5.484)^2 + ... + (10- 5.484)^2)]/10
+σ = √(12.13826 +9+16+25+36+49+64+64+81+100)/10 = 2.135739
 
-EX:           μ = (1+3+4+7+8) / 5 = 4.6        
-σ = √[(1 - 4.6)2 + (3 - 4.6)2 + ... + (8 - 4.6)2)]/5
-σ = √(12.96 + 2.56 + 0.36 + 5.76 + 11.56)/5 = 2.577
-
-
-
-
-
+```
 
 
 
@@ -132,4 +170,8 @@ EX:           μ = (1+3+4+7+8) / 5 = 4.6
 
 
 
-### RESULTS : Arduino uno is interfaced with FSR and output values are indicated on a graph.
+
+
+
+### RESULTS :
+Arduino uno is interfaced with FSR and output values are indicated on a graph.
